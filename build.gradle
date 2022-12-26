@@ -1,0 +1,49 @@
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.1'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '19'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Moleculer core (required)
+	implementation group: 'com.github.berkesa', name: 'moleculer-java', version: '1.2.25'
+	//implementation files('D:\\moleculer-java\\build\\libs\\moleculer-1.2.25.jar')
+
+	// DataTree core (required)
+	implementation group: 'com.github.berkesa', name: 'datatree-core', version: '1.1.2'
+
+	// DataTree promise (required)
+	implementation group: 'com.github.berkesa', name: 'datatree-promise', version: '1.0.8'
+
+	// DataTree adapters (required)
+	implementation group: 'com.github.berkesa', name: 'datatree-adapters', version: '1.0.15'
+
+	// Nats Transporter (required)
+	implementation group: 'io.nats', name: 'jnats', version: '2.16.5'
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	enabled = false
+}
+
+jar {
+	enabled = true
+}
