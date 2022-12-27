@@ -14,8 +14,11 @@ import java.util.Locale;
 
 public abstract class AbstractService extends Service {
 
-    @Autowired
-    private RequestParser requestParser;
+    protected RequestParser requestParser;
+
+    public AbstractService(RequestParser requestParser) {
+        this.requestParser = requestParser;
+    }
 
     public <T> Object parse(Context context, Class<T> c, ParsedAction<ActionRequest<T>, Object> f) throws Exception {
         Meta meta = Meta.of(context.params.getMeta(true));

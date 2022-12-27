@@ -1,6 +1,7 @@
 package com.example.demo.api;
 
 import com.example.demo.dtos.AddMathDto;
+import com.example.demo.services.RequestParser;
 import io.datatree.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -13,11 +14,13 @@ import services.moleculer.service.*;
 @Controller
 public class Math extends AbstractService {
 
-    @Autowired
-    private Environment env;
+    private MessageSource messageSource;
 
     @Autowired
-    private MessageSource messageSource;
+    public Math(MessageSource messageSource, RequestParser requestParser) {
+        super(requestParser);
+        this.messageSource = messageSource;
+    }
 
     @Auth
     @Name("add")
