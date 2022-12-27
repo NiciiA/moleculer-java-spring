@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.middlewares.AuthorizationMiddleware;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import services.moleculer.ServiceBroker;
@@ -12,16 +13,19 @@ public class DemoApplication {
 
 	@Bean(initMethod = "start", destroyMethod = "stop")
 	public ServiceBroker getServiceBroker() {
-		ServiceBrokerConfig cfg = new ServiceBrokerConfig();
+		ServiceBrokerConfig config = new ServiceBrokerConfig();
 
-		cfg.setJsonReaders("jackson");
-		cfg.setJsonWriters("jackson");
+        config.setJsonReaders("jackson");
+        config.setJsonWriters("jackson");
 
-		cfg.setMetricsEnabled(true);
+        config.setMetricsEnabled(true);
 
-		cfg.setTransporter(new NatsTransporter("nats://localhost:4222"));
+        config.setTransporter(new NatsTransporter("nats://192.168.1.144:4222"));
 
-		return new ServiceBroker(cfg);
+        ServiceBroker broker = new ServiceBroker(config);
+        broker.use(new AuthorizationMiddleware());
+
+		return broker;
 	}
 
 	@Bean

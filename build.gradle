@@ -11,17 +11,26 @@ sourceCompatibility = '19'
 
 repositories {
 	mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// Moleculer core (required)
-	implementation group: 'com.github.berkesa', name: 'moleculer-java', version: '1.2.25'
-	//implementation files('D:\\moleculer-java\\build\\libs\\moleculer-1.2.25.jar')
+	//implementation group: 'com.github.berkesa', name: 'moleculer-java', version: '1.2.25'
+	implementation fileTree(includes: ['*.jar'], dir: 'libs')
 
-	// DataTree core (required)
+    //implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    //implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.5.Final'
+    //implementation group: 'org.glassfish', name: 'javax.el', version: '3.0.0'
+
+    // DataTree core (required)
 	implementation group: 'com.github.berkesa', name: 'datatree-core', version: '1.1.2'
 
 	// DataTree promise (required)
